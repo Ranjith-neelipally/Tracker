@@ -1,74 +1,59 @@
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-} from '@react-navigation/drawer';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {Text} from 'react-native';
 import {useState} from 'react';
-import home from '../screens/Home';
-import Expenses from '../screens/Expenses';
 import {enableScreens} from 'react-native-screens';
 import TabNavigator from './TabNavigator';
 import {NavItems} from './Routes';
+import DrawerNavigator from './DrawerNAvigator';
 
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
 enableScreens();
+const FallbackScreen = () => <Text>Component not found</Text>;
 
 export default function AppNavigator() {
   const [navPreference, setNavPreference] = useState<'tab' | 'drawer'>('tab');
-
-  const CustomDrawerContent = (props: any) => {
-    return (
-      <DrawerContentScrollView {...props}>
-        <View style={{padding: 12}}>
-          <Text>Hello,</Text>
-          <Text>Username</Text>
-        </View>
-        <View style={{padding: 4}}>
-          <DrawerItemList {...props} />
-        </View>
-      </DrawerContentScrollView>
-    );
-  };
 
   return (
     <NavigationContainer>
       {navPreference === 'drawer' ? (
         <Drawer.Navigator
           initialRouteName="Expenses"
-          drawerContent={props => <CustomDrawerContent {...props} />}
+          drawerContent={props => <DrawerNavigator {...props} />}
           screenOptions={{
             headerShown: true,
             headerStyle: {
               backgroundColor: '#C1D6D9',
             },
-            headerTintColor: 'black',
             headerTitleStyle: {
+              textTransform: 'capitalize',
               fontWeight: 'bold',
             },
             drawerStyle: {
               borderTopEndRadius: 14,
               borderBottomEndRadius: 14,
-              maxWidth: '47%',
+              padding: 12,
+              maxWidth: '60%',
             },
-            drawerIcon: ({focused, color, size}) => (
+            drawerIcon: ({color, size}) => (
               <Text style={{color: color, fontSize: size}}>🏠</Text>
             ),
           }}>
-          {NavItems.map((item, index) => (
-            <Drawer.Screen
-              key={index}
-              name={item.name}
-              component={item.component}
-            />
-          ))}
-          {/* <Drawer.Screen name="Home" component={home} />
-          <Drawer.Screen name="Expenses" component={Expenses} /> */}
+          {NavItems.map((item, index) => {
+            const screenName = item.name || `Screen-${index}`;
+            const ScreenComponent = item.component || FallbackScreen;
+            return (
+              <Drawer.Screen
+                key={index}
+                name={screenName}
+                component={ScreenComponent}
+              />
+            );
+          })}
         </Drawer.Navigator>
       ) : (
         <Tab.Navigator
@@ -77,13 +62,17 @@ export default function AppNavigator() {
           screenOptions={{
             headerShown: false,
           }}>
-          {NavItems.map((item, index) => (
-            <Tab.Screen
-              key={index}
-              name={item.name}
-              component={item.component}
-            />
-          ))}
+          {NavItems.map((item, index) => {
+            const screenName = item.name || `Screen-${index}`;
+            const ScreenComponent = item.component || FallbackScreen;
+            return (
+              <Tab.Screen
+                key={index}
+                name={screenName}
+                component={ScreenComponent}
+              />
+            );
+          })}
         </Tab.Navigator>
       )}
     </NavigationContainer>

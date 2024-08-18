@@ -1,5 +1,5 @@
 {
-  "name": "Tracker",
+  "name": "tracker",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,12 +10,14 @@
     "test": "jest"
   },
   "dependencies": {
-    "@react-native-firebase/app": "^20.3.0",
+    "@nozbe/watermelondb": "^0.27.1",
+    "@react-native-async-storage/async-storage": "^1.24.0",
     "@react-navigation/bottom-tabs": "^6.6.1",
     "@react-navigation/drawer": "^6.7.2",
     "@react-navigation/native": "^6.1.18",
     "@types/styled-components-react-native": "^5.2.5",
-    "firebase": "^10.12.4",
+    "axios": "^1.7.3",
+    "depcheck": "^1.4.7",
     "react": "18.2.0",
     "react-native": "0.74.3",
     "react-native-drawer-layout": "^3.3.2",
@@ -30,6 +32,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@babel/plugin-proposal-decorators": "^7.24.7",
     "@babel/preset-env": "^7.20.0",
     "@babel/runtime": "^7.20.0",
     "@react-native/babel-preset": "0.74.85",

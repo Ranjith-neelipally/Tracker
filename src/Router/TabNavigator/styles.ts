@@ -12,7 +12,7 @@ export const TabItemContainer = styled.View`
 export const TabNavigatorStyles = styled.View`
   flex-direction: row;
   height: 80px;
-  background-color: #b0b0b090;
+  background-color: #d5dbdb90;
   display: flex;
   flex: 1;
   padding: 8px;

@@ -1,16 +1,28 @@
 import React from 'react';
-import {SafeAreaView, StatusBar, Text} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import AppNavigator from './src/Router/AppNavigator';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {ThemeProvider, useTheme} from './src/theme/ThemeContext';
+import CustomStatusBar from './src/components/StatusBar';
 
-function App(): React.JSX.Element {
+const MainApp = () => {
+  const {theme, toggleTheme} = useTheme();
+
   return (
     <SafeAreaView style={{flex: 1}}>
-      <StatusBar animated={true} backgroundColor="#C1D6D9" />
+      <CustomStatusBar />
       <GestureHandlerRootView>
         <AppNavigator />
       </GestureHandlerRootView>
     </SafeAreaView>
+  );
+};
+
+function App(): React.JSX.Element {
+  return (
+    <ThemeProvider>
+      <MainApp />
+    </ThemeProvider>
   );
 }
 

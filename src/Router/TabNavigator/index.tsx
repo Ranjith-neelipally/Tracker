@@ -1,5 +1,4 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {NavItems} from '../Routes';
 import TabItem from '../../components/TabItem';
@@ -10,12 +9,6 @@ import {
 } from './styles';
 import IconWrapper from '../../components/Icons';
 import {Icons} from '../../components/Icons/helpers';
-
-// Props type for CustomTabBarButton
-interface CustomTabBarButtonProps {
-  children: React.ReactNode;
-  onPress: () => void;
-}
 
 const TabNavigator: React.FC<BottomTabBarProps> = props => {
   return (
